@@ -9,12 +9,16 @@ export default function Home() {
 					<div className="flex items-center justify-center mb-4">
 						<div className="text-4xl mr-3">🏋️‍♀️</div>
 						<h1 className="text-4xl font-bold text-gray-800 dark:text-white">
-							KNKF Powerlifting
+							Aidans KNKF Kalender
 						</h1>
 					</div>
 					<p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-						Ontdek alle nationale powerlifting wedstrijden georganiseerd door de
-						Koninklijke Nederlandse Krachtsport en Fitnessbond
+						Op deze pagina vind je een overzicht van alle aankomende
+						powerlifting meets in Nederland, georganiseerd door de KNKF.
+					</p>
+					<p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+						De KNKF heeft geen mailing lijst, dus deze website functioneert als
+						mijn persoonlijke mailinglijst.
 					</p>
 				</header>
 

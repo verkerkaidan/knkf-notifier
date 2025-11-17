@@ -68,7 +68,8 @@ export default function CompetitionsList() {
 						Powerlifting Wedstrijden
 					</h2>
 					<p className="text-gray-600 dark:text-gray-400">
-						Ontdek alle komende powerlifting wedstrijden in Nederland
+						Alle komende powerlifting wedstrijden in Nederland georganiseerd
+						door de KNKF.
 					</p>
 				</div>
 				<ScrapeButton />
