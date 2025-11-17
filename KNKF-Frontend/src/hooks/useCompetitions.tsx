@@ -111,3 +111,52 @@ export function useUpcomingCompetitions() {
 export function useQualificationCompetitions() {
 	return useCompetitions({ qualificationRequired: true });
 }
+
+interface ScrapeResponse {
+	success: boolean;
+	message: string;
+	count?: number;
+	error?: string;
+}
+
+/**
+ * Hook to trigger the scraper and invalidate queries
+ */
+export function useScrapeCompetitions() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: async (): Promise<ScrapeResponse> => {
+			const headers: HeadersInit = {
+				"Content-Type": "application/json",
+			};
+			
+			// Add API key if configured
+			const apiKey = process.env.NEXT_PUBLIC_SCRAPE_API_KEY;
+			if (apiKey) {
+				headers["x-api-key"] = apiKey;
+			}
+			
+			// Use external backend API if configured, otherwise use local Next.js API route
+			const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL 
+				? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scrape`
+				: "/api/scrape";
+			
+			const response = await fetch(apiUrl, {
+				method: "POST",
+				headers,
+			});
+
+			if (!response.ok) {
+				const error = await response.json();
+				throw new Error(error.message || "Failed to scrape competitions");
+			}
+
+			return response.json();
+		},
+		onSuccess: () => {
+			// Invalidate all competition queries to refetch fresh data
+			queryClient.invalidateQueries({ queryKey: competitionKeys.all });
+		},
+	});
+}

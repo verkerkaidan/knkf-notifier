@@ -5,6 +5,7 @@ import { useUpcomingCompetitions } from "@/hooks/useCompetitions";
 import type { Competition } from "@/lib/supabase";
 import CompetitionCard from "./CompetitionCard";
 import LoadingSpinner from "./LoadingSpinner";
+import ScrapeButton from "./ScrapeButton";
 
 export default function CompetitionsList() {
 	const [filter, setFilter] = useState<string>("all");
@@ -61,13 +62,16 @@ export default function CompetitionsList() {
 	return (
 		<div className="max-w-7xl mx-auto">
 			{/* Header */}
-			<div className="mb-8">
-				<h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-					Powerlifting Wedstrijden
-				</h2>
-				<p className="text-gray-600 dark:text-gray-400">
-					Ontdek alle komende powerlifting wedstrijden in Nederland
-				</p>
+			<div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+				<div>
+					<h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+						Powerlifting Wedstrijden
+					</h2>
+					<p className="text-gray-600 dark:text-gray-400">
+						Ontdek alle komende powerlifting wedstrijden in Nederland
+					</p>
+				</div>
+				<ScrapeButton />
 			</div>
 
 			{/* Filter buttons */}
