@@ -23,5 +23,13 @@ jobs:
           pip install -r knkf-backend/requirements.txt
 
       - name: Run notify_changes
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
+          COMPETITIONS_TABLE: ${{ secrets.COMPETITIONS_TABLE }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
         run: |
           python knkf-backend/notify_changes.py
