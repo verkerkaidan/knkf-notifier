@@ -49,15 +49,21 @@ async def run_scraper():
     global last_scrape_time
     
     try:
-        # Run main.py as a subprocess
         import subprocess
+        import re
         result = subprocess.run([
             sys.executable, os.path.join(os.path.dirname(__file__), "main.py")
         ], capture_output=True, text=True)
         last_scrape_time = datetime.now()
         if result.returncode == 0:
-            # Optionally parse output for count, or just return success
-            return {"success": True, "count": None, "message": result.stdout}
+            stdout = result.stdout
+            # Parse for count
+            count_match = re.search(r"Total competitions found: (\\d+)", stdout)
+            db_count_match = re.search(r"Saved to database: (\\d+)/(\\d+)", stdout)
+            count = int(db_count_match.group(1)) if db_count_match else (
+                int(count_match.group(1)) if count_match else 0
+            )
+            return {"success": True, "count": count, "message": stdout}
         else:
             return {"success": False, "error": result.stderr}
     except Exception as e:
@@ -98,11 +104,10 @@ async def trigger_scrape(
     
     # Run scraper
     result = await run_scraper()
-    
     if result["success"]:
         return ScrapeResponse(
             success=True,
-            message=f"Successfully scraped and saved {result['count']} competitions",
+            message=f"Successfully scraped and saved {result['count']} competitions" if result["count"] is not None else "Scrape completed.",
             count=result["count"]
         )
     else:
