@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCompetitions } from "@/hooks/useCompetitions";
+import { useUpcomingCompetitions } from "@/hooks/useCompetitions";
 import type { Competition } from "@/lib/supabase";
 import CompetitionCard from "./CompetitionCard";
 import LoadingSpinner from "./LoadingSpinner";
@@ -15,7 +15,7 @@ export default function CompetitionsList() {
 		isLoading,
 		error,
 		isError,
-	} = useCompetitions();
+	} = useUpcomingCompetitions();
 
 	const filterCompetitions = (competition: Competition) => {
 		if (filter === "all") return true;
