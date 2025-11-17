@@ -39,7 +39,7 @@ def main():
                     lines.append(f"    {field}: {change['old']} -> {change['new']}")
         body = '\n'.join(lines)
         subject = "KNKF Competition Changes Detected"
-        send_email(subject, body)
+        # send_email(subject, body)  # Disabled for deployment
         db.bulk_upsert_competitions(scraped_competitions)
         print("Changes detected, notification sent, and Supabase updated.")
     else:
