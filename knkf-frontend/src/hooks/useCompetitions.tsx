@@ -130,18 +130,18 @@ export function useScrapeCompetitions() {
 			const headers: HeadersInit = {
 				"Content-Type": "application/json",
 			};
-			
+
 			// Add API key if configured
 			const apiKey = process.env.NEXT_PUBLIC_SCRAPE_API_KEY;
 			if (apiKey) {
 				headers["x-api-key"] = apiKey;
 			}
-			
+
 			// Use external backend API if configured, otherwise use local Next.js API route
-			const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL 
+			const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL
 				? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scrape`
 				: "/api/scrape";
-			
+
 			const response = await fetch(apiUrl, {
 				method: "POST",
 				headers,

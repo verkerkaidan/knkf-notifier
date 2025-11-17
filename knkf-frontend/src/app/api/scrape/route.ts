@@ -74,7 +74,7 @@ export async function POST(
 
 		// Execute the scraper with database save
 		// Using template literals with validated paths (no user input)
-		const command = `cd "${backendPath}" && "${venvPython}" scraper.py --database --no-json`;
+		const command = `cd "${backendPath}" && "${venvPython}" main.py`;
 
 		console.log("Executing scraper command:", command);
 
