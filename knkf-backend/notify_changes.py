@@ -75,7 +75,8 @@ def main():
 
     subject = f"KNKF Competition Changes Detected ({len(added)} new, {len(removed)} removed, {len(updated)} updated)"
     send_email(subject, body)
-    print("Change notification sent.")
+    db.bulk_upsert_competitions(new_comps)
+    print("Change notification sent and database updated.")
 
 if __name__ == "__main__":
     main()
