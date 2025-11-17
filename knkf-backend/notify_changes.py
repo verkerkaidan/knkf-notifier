@@ -70,7 +70,7 @@ def main():
     if updated:
         lines.append(f"\nUpdated competitions ({len(updated)}):")
         for u in updated:
-            lines.append(f"- {u['name']} (ID: {u['id']})")
+            lines.append(f"- {u['name']} (ID: {u.get('id', 'N/A')})")
             for field, change in u['changes'].items():
                 lines.append(f"    {field}: '{change['old']}' → '{change['new']}'")
     body = '\n'.join(lines)
