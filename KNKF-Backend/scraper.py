@@ -200,6 +200,13 @@ class KNKFScraper:
             # Parse capacity (sixth column)
             competition['capacity'] = cells[5].get_text(strip=True)
             
+            # Filter out non-competition entries like Sectievergaderingen (section meetings)
+            if competition['name']:
+                name_lower = competition['name'].lower()
+                excluded_terms = ['sectievergadering', 'bestuursvergadering', 'algemene ledenvergadering']
+                if any(term in name_lower for term in excluded_terms):
+                    return None
+            
             return competition if competition['name'] else None
             
         except Exception as e:
