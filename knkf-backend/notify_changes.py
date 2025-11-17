@@ -65,6 +65,8 @@ def main():
         lines.append(f"\nRemoved competitions ({len(removed)}):")
         for c in removed:
             lines.append(f"- {c['name']} ({c['start_date']} - {c['end_date']}) @ {c['location']}")
+            if 'id' in c:
+                db.delete_competition(c['id'])
     if updated:
         lines.append(f"\nUpdated competitions ({len(updated)}):")
         for u in updated:
