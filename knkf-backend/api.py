@@ -49,15 +49,17 @@ async def run_scraper():
     global last_scrape_time
     
     try:
-        scraper = KNKFScraper()
-        competitions = scraper.scrape_competitions()
-        
-        if competitions:
-            count = scraper.save_to_database(competitions)
-            last_scrape_time = datetime.now()
-            return {"success": True, "count": count}
+        # Run main.py as a subprocess
+        import subprocess
+        result = subprocess.run([
+            sys.executable, os.path.join(os.path.dirname(__file__), "main.py")
+        ], capture_output=True, text=True)
+        last_scrape_time = datetime.now()
+        if result.returncode == 0:
+            # Optionally parse output for count, or just return success
+            return {"success": True, "count": None, "message": result.stdout}
         else:
-            return {"success": False, "error": "No competitions found"}
+            return {"success": False, "error": result.stderr}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
