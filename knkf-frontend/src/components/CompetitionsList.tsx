@@ -60,14 +60,14 @@ export default function CompetitionsList() {
 	];
 
 	return (
-		<div className="max-w-7xl mx-auto">
+		<div className="max-w-5xl mx-auto px-2 py-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow">
 			{/* Header */}
-			<div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+			<div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 				<div>
-					<h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+					<h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 tracking-tight">
 						Powerlifting Wedstrijden
 					</h2>
-					<p className="text-gray-600 dark:text-gray-400">
+					<p className="text-sm text-gray-600 dark:text-gray-300">
 						Alle komende powerlifting wedstrijden in Nederland georganiseerd
 						door de KNKF.
 					</p>
@@ -76,14 +76,14 @@ export default function CompetitionsList() {
 			</div>
 
 			{/* Filter buttons */}
-			<div className="flex flex-wrap gap-3 mb-8">
+			<div className="flex flex-wrap gap-2 mb-6 justify-center">
 				<button
 					type="button"
 					onClick={() => setFilter("all")}
-					className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+					className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-gray-300 dark:border-gray-700 shadow-sm ${
 						filter === "all"
 							? "bg-blue-600 text-white"
-							: "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+							: "bg-gray-100 text-gray-700 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-900"
 					}`}
 				>
 					Alle wedstrijden ({competitions.length})
@@ -92,10 +92,10 @@ export default function CompetitionsList() {
 				<button
 					type="button"
 					onClick={() => setFilter("upcoming")}
-					className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+					className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-gray-300 dark:border-gray-700 shadow-sm ${
 						filter === "upcoming"
 							? "bg-blue-600 text-white"
-							: "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+							: "bg-gray-100 text-gray-700 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-900"
 					}`}
 				>
 					📅 Komende wedstrijden
@@ -104,10 +104,10 @@ export default function CompetitionsList() {
 				<button
 					type="button"
 					onClick={() => setFilter("qualification")}
-					className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+					className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-gray-300 dark:border-gray-700 shadow-sm ${
 						filter === "qualification"
 							? "bg-blue-600 text-white"
-							: "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+							: "bg-gray-100 text-gray-700 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-900"
 					}`}
 				>
 					👑 Kwalificatie vereist
@@ -118,10 +118,10 @@ export default function CompetitionsList() {
 						type="button"
 						key={type}
 						onClick={() => setFilter(type)}
-						className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+						className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-gray-300 dark:border-gray-700 shadow-sm ${
 							filter === type
 								? "bg-blue-600 text-white"
-								: "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+								: "bg-gray-100 text-gray-700 hover:bg-blue-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-blue-900"
 						}`}
 					>
 						{type}
@@ -130,8 +130,8 @@ export default function CompetitionsList() {
 			</div>
 
 			{/* Results count */}
-			<div className="mb-6">
-				<p className="text-sm text-gray-600 dark:text-gray-400">
+			<div className="mb-4 text-center">
+				<p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
 					{filteredCompetitions.length} wedstrijd
 					{filteredCompetitions.length !== 1 ? "en" : ""} gevonden
 				</p>
@@ -139,20 +139,20 @@ export default function CompetitionsList() {
 
 			{/* Competition grid */}
 			{filteredCompetitions.length > 0 ? (
-				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 					{filteredCompetitions.map((competition) => (
 						<CompetitionCard key={competition.id} competition={competition} />
 					))}
 				</div>
 			) : (
-				<div className="text-center py-12">
-					<div className="text-gray-400 dark:text-gray-500 text-4xl mb-4">
+				<div className="text-center py-10">
+					<div className="text-gray-400 dark:text-gray-500 text-3xl mb-3">
 						🔍
 					</div>
-					<h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+					<h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-1">
 						Geen wedstrijden gevonden
 					</h3>
-					<p className="text-gray-600 dark:text-gray-400">
+					<p className="text-sm text-gray-600 dark:text-gray-300">
 						Probeer een andere filter of kom later terug voor nieuwe
 						wedstrijden.
 					</p>

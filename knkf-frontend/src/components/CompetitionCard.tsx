@@ -68,44 +68,44 @@ export default function CompetitionCard({ competition }: CompetitionCardProps) {
 	};
 
 	return (
-		<div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700">
+		<div className="bg-white dark:bg-gray-950 rounded-lg shadow hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-800 flex flex-col justify-between min-h-[340px]">
 			{/* Header */}
-			<div className="p-6 pb-4">
-				<div className="flex items-start justify-between mb-3">
-					<h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-2 flex-1">
+			<div className="p-5 pb-3">
+				<div className="flex items-start justify-between mb-2">
+					<h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 line-clamp-2 flex-1">
 						{competition.name}
 					</h3>
 					{competition.qualification_required && (
-						<span className="ml-2 inline-block">👑</span>
+						<span className="ml-2 inline-block text-lg">👑</span>
 					)}
 				</div>
 
 				{/* Date */}
-				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-2">
-					<span className="text-sm mr-2">📅</span>
-					<span className="text-sm font-medium">
+				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-1 text-sm">
+					<span className="mr-2">📅</span>
+					<span>
 						{formatDateRange(competition.start_date, competition.end_date)}
 					</span>
 				</div>
 
 				{/* Location */}
-				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-2">
-					<span className="text-sm mr-2">📍</span>
-					<span className="text-sm">{competition.location}</span>
+				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-1 text-sm">
+					<span className="mr-2">📍</span>
+					<span>{competition.location}</span>
 				</div>
 
 				{/* Organization */}
-				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-4">
-					<span className="text-sm mr-2">🏢</span>
-					<span className="text-sm">{competition.organization}</span>
+				<div className="flex items-center text-gray-600 dark:text-gray-300 mb-3 text-sm">
+					<span className="mr-2">🏢</span>
+					<span>{competition.organization}</span>
 				</div>
 
 				{/* Tags */}
-				<div className="flex flex-wrap gap-2 mb-4">
+				<div className="flex flex-wrap gap-2 mb-3">
 					{/* Competition Type */}
 					{competition.competition_type && (
 						<span
-							className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getTypeColor(competition.competition_type)}`}
+							className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getTypeColor(competition.competition_type)}`}
 						>
 							{competition.competition_type}
 						</span>
@@ -113,14 +113,14 @@ export default function CompetitionCard({ competition }: CompetitionCardProps) {
 
 					{/* Status */}
 					<span
-						className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(competition.status)}`}
+						className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(competition.status)}`}
 					>
 						{competition.status}
 					</span>
 
 					{/* Capacity */}
 					{competition.capacity && competition.capacity !== "-" && (
-						<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+						<span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
 							{competition.capacity} plaatsen
 						</span>
 					)}
@@ -128,21 +128,19 @@ export default function CompetitionCard({ competition }: CompetitionCardProps) {
 
 				{/* Qualification Required */}
 				{competition.qualification_required && (
-					<div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 mb-4">
-						<div className="flex items-center">
-							<span className="text-yellow-600 dark:text-yellow-400 mr-2">
-								⚠️
-							</span>
-							<span className="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
-								Kwalificatie vereist
-							</span>
-						</div>
+					<div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-2 mb-2 flex items-center">
+						<span className="text-yellow-600 dark:text-yellow-400 text-base mr-2">
+							⚠️
+						</span>
+						<span className="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
+							Kwalificatie vereist
+						</span>
 					</div>
 				)}
 			</div>
 
 			{/* Footer */}
-			<div className="px-6 pb-6">
+			<div className="px-5 pb-4">
 				{competition.url ? (
 					<a
 						href={competition.url}
