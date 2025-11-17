@@ -29,7 +29,7 @@ app.add_middleware(
 
 # Rate limiting
 last_scrape_time = None
-RATE_LIMIT_SECONDS = 60
+RATE_LIMIT_SECONDS = 300 # 5 minutes
 
 class ScrapeResponse(BaseModel):
     success: bool
