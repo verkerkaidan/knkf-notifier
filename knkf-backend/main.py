@@ -19,9 +19,8 @@ def main():
     # 3. Compare competitions
     added, removed, updated = compare_competitions(supabase_competitions, scraped_competitions)
 
-    # 4. If changes, send notification and update Supabase
+    # 4. If changes, send notification
     if added or removed or updated:
-        # Format detailed change report
         lines = []
         if added:
             lines.append("Added competitions:")
@@ -31,8 +30,6 @@ def main():
             lines.append("\nRemoved competitions:")
             for c in removed:
                 lines.append(f"- {c.get('name','')} ({c.get('start_date','')})")
-                if 'id' in c:
-                    db.delete_competition(c['id'])
         if updated:
             lines.append("\nUpdated competitions:")
             for u in updated:
@@ -42,10 +39,17 @@ def main():
         body = '\n'.join(lines)
         subject = "KNKF Competition Changes Detected"
         # send_email(subject, body)  # Disabled for deployment
-        db.bulk_upsert_competitions(scraped_competitions)
-        print("Changes detected, notification sent, and Supabase updated.")
+        print("Changes detected, notification sent.")
     else:
         print("No changes detected.")
+
+    # 5. Replace all competitions in the database with the newly scraped ones
+    all_db_comps = db.get_all_competitions()
+    for comp in all_db_comps:
+        if 'id' in comp:
+            db.delete_competition(comp['id'])
+    db.bulk_upsert_competitions(scraped_competitions)
+    print("Database replaced with newly scraped competitions.")
 
 
 if __name__ == "__main__":
