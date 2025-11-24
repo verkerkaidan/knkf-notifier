@@ -5,7 +5,6 @@ import { useUpcomingCompetitions } from "@/hooks/useCompetitions";
 import type { Competition } from "@/lib/supabase";
 import CompetitionCard from "./CompetitionCard";
 import LoadingSpinner from "./LoadingSpinner";
-import ScrapeButton from "./ScrapeButton";
 
 export default function CompetitionsList() {
 	const [filter, setFilter] = useState<string>("all");
@@ -72,7 +71,6 @@ export default function CompetitionsList() {
 						door de KNKF.
 					</p>
 				</div>
-				<ScrapeButton />
 			</div>
 
 			{/* Filter buttons */}
